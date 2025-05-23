@@ -11,16 +11,17 @@ let chartInstances = {};
 
 // Component prices (COP)
 const PRICES = {
-    panel: 1500000,        // 550W panel
-    inverterOnGrid: 3000000, // per kW
-    inverterOffGrid: 4000000, // per kW  
-    battery: 2000000,      // per kWh
-    chargeController: 800000, // MPPT controller
-    structure: 300000,     // per panel
-    cabling: 50000,        // per panel
-    protections: 500000,   // fixed
-    installation: 0.3      // 30% of equipment cost
+    panel: 550000,          // 550W panel (Promedio entre $420.000 y $720.000)
+    inverterOnGrid: 750000, // per kW (Promedio bajo)
+    inverterOffGrid: 1500000, // per kW (Promedio de las opciones más comunes)
+    battery: 1800000,       // per kWh (Promedio de baterías de Litio)
+    chargeController: 800000, // MPPT controller (Confirmado como razonable)
+    structure: 200000,      // per panel (Promedio, varía mucho por tipo)
+    cabling: 50000,         // per panel (Se mantiene, es una estimación general)
+    protections: 500000,    // fixed (Se mantiene, es un valor razonable)
+    installation: 0.3       // 30% of equipment cost (Se mantiene)
 };
+
 
 // ===================================
 // INITIALIZATION
@@ -1439,7 +1440,7 @@ function generatePDF() {
     doc.text('Más de 10 años de experiencia • Ingenieros certificados • Garantía de calidad', 105, yPos + 16, { align: 'center' });
     
     doc.setFont(undefined, 'bold');
-    doc.text('Contáctanos: info@synergyatech.com | +57 300 123 4567 | www.synergyatech.com', 105, yPos + 26, { align: 'center' });
+    doc.text('Contáctanos: business@synergyatech.org | +57 3224032671 | synergyatech.org', 105, yPos + 26, { align: 'center' });
     
     // Notes page if needed
     if (projectNotes || document.getElementById('include-diagram').checked) {

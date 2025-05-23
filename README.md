@@ -192,7 +192,10 @@ La aplicación es totalmente responsive:
 ## 📞 Soporte
 
 **Synergyatech**
-- Email: info@synergyatech.com
+- Email: business@synergyatech.org
+- WhatsApp: +57 3224032671
+- Web: https://synergyatech.org
+- Facebook: https://www.facebook.com/people/SynergyaTech-Sistemas/61576814991093/
 - Teléfono: +57 300 123 4567
 - Web: www.synergyatech.com
 
