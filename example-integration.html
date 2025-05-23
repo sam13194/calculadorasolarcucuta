@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo de Integración - Calculadora Solar Synergyatech</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f3f4f6;
+        }
+        .example-section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #2563eb;
+        }
+        code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background: #1f2937;
+            color: #f3f4f6;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        .iframe-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .integration-example {
+            border: 2px dashed #2563eb;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            background: rgba(37, 99, 235, 0.05);
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-right: 1rem;
+            margin-top: 1rem;
+        }
+        .btn:hover {
+            background: #1e40af;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Ejemplos de Integración - Calculadora Solar Synergyatech</h1>
+
+    <div class="example-section">
+        <h2>1. Integración como iFrame</h2>
+        <p>Puedes integrar la calculadora solar en cualquier sitio web usando un iframe:</p>
+        
+        <pre><code>&lt;iframe 
+    src="https://synergyatech.github.io/calculadora-solar/" 
+    width="100%" 
+    height="800"
+    frameborder="0"
+    title="Calculadora Solar Synergyatech"&gt;
+&lt;/iframe&gt;</code></pre>
+
+        <div class="integration-example">
+            <p><strong>Ejemplo en vivo:</strong></p>
+            <div class="iframe-container">
+                <iframe src="index.html" title="Calculadora Solar Demo"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="example-section">
+        <h2>2. Integración con Parámetros URL</h2>
+        <p>Puedes pre-cargar valores usando parámetros en la URL:</p>
+        
+        <pre><code>// Ejemplo de URL con parámetros
+https://tu-sitio.com/calculadora-solar/?department=antioquia&rate=650&consumption=300
+
+// Código JavaScript para leer parámetros
+const urlParams = new URLSearchParams(window.location.search);
+const department = urlParams.get('department');
+const rate = urlParams.get('rate');
+const consumption = urlParams.get('consumption');
+
+// Auto-llenar formulario
+if (department) document.getElementById('department').value = department;
+if (rate) document.getElementById('electricity-rate').value = rate;
+if (consumption) document.getElementById('monthly-consumption').value = consumption;</code></pre>
+    </div>
+
+    <div class="example-section">
+        <h2>3. Integración con API Externa</h2>
+        <p>Ejemplo de cómo enviar resultados a tu servidor:</p>
+        
+        <pre><code>// Después de calcular el sistema
+function sendResultsToServer(systemData) {
+    fetch('https://api.synergyatech.com/solar-calculations', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer YOUR_API_KEY'
+        },
+        body: JSON.stringify({
+            client: {
+                name: document.getElementById('client-name').value,
+                email: document.getElementById('client-email').value
+            },
+            system: systemData,
+            timestamp: new Date().toISOString()
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Datos guardados:', data);
+        // Mostrar confirmación al usuario
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}</code></pre>
+    </div>
+
+    <div class="example-section">
+        <h2>4. Widget Embebido Personalizado</h2>
+        <p>Crea un widget minimalista que redirija a la calculadora completa:</p>
+        
+        <pre><code>&lt;!-- Widget HTML --&gt;
+&lt;div id="solar-widget"&gt;
+    &lt;h3&gt;¿Cuánto puedes ahorrar con energía solar?&lt;/h3&gt;
+    &lt;input type="number" id="widget-consumption" placeholder="Consumo mensual (kWh)"&gt;
+    &lt;select id="widget-department"&gt;
+        &lt;option value="antioquia"&gt;Antioquia&lt;/option&gt;
+        &lt;option value="bogota"&gt;Bogotá&lt;/option&gt;
+        &lt;!-- más opciones --&gt;
+    &lt;/select&gt;
+    &lt;button onclick="calculateQuickEstimate()"&gt;Calcular Ahorro&lt;/button&gt;
+    &lt;div id="widget-result"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+function calculateQuickEstimate() {
+    const consumption = document.getElementById('widget-consumption').value;
+    const department = document.getElementById('widget-department').value;
+    const rate = 650; // Tarifa promedio
+    
+    // Cálculo simplificado
+    const monthlySavings = consumption * rate * 0.9; // 90% de ahorro
+    
+    document.getElementById('widget-result').innerHTML = `
+        &lt;p&gt;Ahorro estimado: $${monthlySavings.toLocaleString()}/mes&lt;/p&gt;
+        &lt;a href="https://calculadora-solar.com?consumption=${consumption}&department=${department}" 
+           target="_blank"&gt;Ver cálculo detallado&lt;/a&gt;
+    `;
+}
+&lt;/script&gt;</code></pre>
+    </div>
+
+    <div class="example-section">
+        <h2>5. Integración con Google Analytics</h2>
+        <p>Rastrea eventos importantes en la calculadora:</p>
+        
+        <pre><code>// Agregar en script.js
+
+// Rastrear cálculo de sistema
+function trackCalculation(systemType, consumption) {
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'calculate_system', {
+            'event_category': 'engagement',
+            'event_label': systemType,
+            'value': consumption
+        });
+    }
+}
+
+// Rastrear generación de PDF
+function trackPDFGeneration(clientName) {
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'generate_pdf', {
+            'event_category': 'conversion',
+            'event_label': 'proposal_generated'
+        });
+    }
+}
+
+// Rastrear navegación entre secciones
+document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', function() {
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'page_view', {
+                'page_title': this.dataset.section,
+                'page_path': '/' + this.dataset.section
+            });
+        }
+    });
+});</code></pre>
+    </div>
+
+    <div class="example-section">
+        <h2>6. Integración con WhatsApp Business</h2>
+        <p>Envía resultados directamente a WhatsApp:</p>
+        
+        <pre><code>function shareOnWhatsApp(systemData) {
+    const message = `
+*Cotización Sistema Solar*
+Cliente: ${document.getElementById('client-name').value}
+Sistema: ${systemData.actualSystemSize} kW
+Inversión: ${formatCurrency(systemData.totalCost)}
+Ahorro mensual: ${formatCurrency(systemData.monthlySavings)}
+Retorno: ${(systemData.totalCost / (systemData.monthlySavings * 12)).toFixed(1)} años
+
+¿Desea agendar una visita técnica?
+    `.trim();
+    
+    const phoneNumber = '573001234567'; // Número de WhatsApp Business
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    window.open(whatsappUrl, '_blank');
+}</code></pre>
+    </div>
+
+    <div class="example-section">
+        <h2>7. Modo Kiosko / Feria</h2>
+        <p>Configuración especial para stands en ferias:</p>
+        
+        <pre><code>// Agregar a script.js para modo kiosko
+
+let inactivityTimer;
+const INACTIVITY_TIMEOUT = 120000; // 2 minutos
+
+function resetInactivityTimer() {
+    clearTimeout(inactivityTimer);
+    inactivityTimer = setTimeout(() => {
+        // Resetear formulario
+        document.querySelectorAll('input').forEach(input => input.value = '');
+        document.querySelectorAll('select').forEach(select => select.selectedIndex = 0);
+        
+        // Volver a página principal
+        document.querySelector('[data-section="calculator"]').click();
+        
+        // Mostrar mensaje de bienvenida
+        showWelcomeMessage();
+    }, INACTIVITY_TIMEOUT);
+}
+
+// Detectar actividad
+document.addEventListener('click', resetInactivityTimer);
+document.addEventListener('keypress', resetInactivityTimer);
+document.addEventListener('touchstart', resetInactivityTimer);
+
+// Iniciar timer
+resetInactivityTimer();</code></pre>
+    </div>
+
+    <div class="example-section">
+        <h2>8. Exportar Datos a Excel</h2>
+        <p>Función para exportar cotización a Excel:</p>
+        
+        <pre><code>function exportToExcel(systemData) {
+    // Crear CSV con los datos
+    const csvContent = `
+Calculadora Solar Synergyatech
+Fecha,${new Date().toLocaleDateString()}
+Cliente,${document.getElementById('client-name').value}
+Email,${document.getElementById('client-email').value}
+
+SISTEMA RECOMENDADO
+Tipo,${currentSystemType === 'ongrid' ? 'On-Grid' : 'Off-Grid'}
+Potencia (kW),${systemData.actualSystemSize}
+Paneles necesarios,${systemData.panelsNeeded}
+Inversión total,${systemData.totalCost}
+
+ANÁLISIS FINANCIERO
+Ahorro mensual,${systemData.monthlySavings}
+Período de retorno,${(systemData.totalCost / (systemData.monthlySavings * 12)).toFixed(1)} años
+Generación anual (kWh),${systemData.yearlyGeneration}
+
+COMPONENTES
+${systemData.components.map(c => `${c.name},${c.qty},${c.qty * c.price}`).join('\n')}
+    `.trim();
+    
+    // Crear blob y descargar
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `Cotizacion_Solar_${document.getElementById('client-name').value}_${new Date().toISOString().split('T')[0]}.csv`;
+    link.click();
+}</code></pre>
+    </div>
+
+    <div class="example-section">
+        <h2>🚀 Enlaces Rápidos</h2>
+        <a href="index.html" class="btn">Ver Calculadora</a>
+        <a href="https://github.com/synergyatech/calculadora-solar" class="btn" style="background: #24292e;">GitHub</a>
+        <a href="mailto:info@synergyatech.com" class="btn" style="background: #10b981;">Contacto</a>
+    </div>
+
+    <script>
+        // Ejemplo de código activo en esta página
+        console.log('Página de ejemplos cargada correctamente');
+        
+        // Podrías agregar aquí demostraciones interactivas
+        // de las integraciones mostradas arriba
+    </script>
+</body>
+</html>

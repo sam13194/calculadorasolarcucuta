@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synergyatech - Calculadora Solar Colombia</title>
+    
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L3 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z"/>
+                    </svg>
+                    Synergyatech
+                </div>
+                <div class="tagline">Soluciones Fotovoltaicas Integrales para Colombia</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul class="nav-menu">
+                <li class="nav-item active" data-section="calculator">
+                    <span class="nav-icon">☀️</span>
+                    Calculadora Solar
+                </li>
+                <li class="nav-item" data-section="regulations">
+                    <span class="nav-icon">📋</span>
+                    Regulaciones
+                </li>
+                <li class="nav-item" data-section="learning">
+                    <span class="nav-icon">🎓</span>
+                    Curso Solar
+                </li>
+                <li class="nav-item" data-section="financing">
+                    <span class="nav-icon">💰</span>
+                    Financiamiento
+                </li>
+                <li class="nav-item" data-section="report">
+                    <span class="nav-icon">📄</span>
+                    Informe
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Calculator Section -->
+            <section id="calculator" class="section active">
+                <div class="section-header">
+                    <h1>Calculadora de Sistema Fotovoltaico</h1>
+                    <p>Diseñamos el sistema solar perfecto para tus necesidades</p>
+                </div>
+
+                <!-- Step 1: Location and Rate -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Paso 1: Ubicación y Tarifa</h2>
+                    </div>
+                    <div class="grid grid-2">
+                        <div class="form-group">
+                            <label for="department">
+                                Departamento
+                                <span class="tooltip">ℹ️
+                                    <span class="tooltiptext">Seleccione su departamento para obtener datos precisos de radiación solar</span>
+                                </span>
+                            </label>
+                            <select id="department">
+                                <option value="">Seleccione un departamento</option>
+                                <option value="antioquia" data-radiation="4.5">Antioquia - 4.5 kWh/m²/día</option>
+                                <option value="atlantico" data-radiation="5.2">Atlántico - 5.2 kWh/m²/día</option>
+                                <option value="bogota" data-radiation="4.2">Bogotá D.C. - 4.2 kWh/m²/día</option>
+                                <option value="bolivar" data-radiation="5.0">Bolívar - 5.0 kWh/m²/día</option>
+                                <option value="boyaca" data-radiation="4.3">Boyacá - 4.3 kWh/m²/día</option>
+                                <option value="caldas" data-radiation="4.4">Caldas - 4.4 kWh/m²/día</option>
+                                <option value="caqueta" data-radiation="4.0">Caquetá - 4.0 kWh/m²/día</option>
+                                <option value="cauca" data-radiation="4.3">Cauca - 4.3 kWh/m²/día</option>
+                                <option value="cesar" data-radiation="5.3">Cesar - 5.3 kWh/m²/día</option>
+                                <option value="cordoba" data-radiation="5.1">Córdoba - 5.1 kWh/m²/día</option>
+                                <option value="cundinamarca" data-radiation="4.2">Cundinamarca - 4.2 kWh/m²/día</option>
+                                <option value="guajira" data-radiation="5.5">La Guajira - 5.5 kWh/m²/día</option>
+                                <option value="huila" data-radiation="4.6">Huila - 4.6 kWh/m²/día</option>
+                                <option value="magdalena" data-radiation="5.2">Magdalena - 5.2 kWh/m²/día</option>
+                                <option value="meta" data-radiation="4.3">Meta - 4.3 kWh/m²/día</option>
+                                <option value="narino" data-radiation="4.1">Nariño - 4.1 kWh/m²/día</option>
+                                <option value="norte-santander" data-radiation="4.8">Norte de Santander - 4.8 kWh/m²/día</option>
+                                <option value="quindio" data-radiation="4.3">Quindío - 4.3 kWh/m²/día</option>
+                                <option value="risaralda" data-radiation="4.2">Risaralda - 4.2 kWh/m²/día</option>
+                                <option value="santander" data-radiation="4.5">Santander - 4.5 kWh/m²/día</option>
+                                <option value="sucre" data-radiation="5.1">Sucre - 5.1 kWh/m²/día</option>
+                                <option value="tolima" data-radiation="4.5">Tolima - 4.5 kWh/m²/día</option>
+                                <option value="valle" data-radiation="4.4">Valle del Cauca - 4.4 kWh/m²/día</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="electricity-rate">
+                                Tarifa por kWh (COP)
+                                <span class="tooltip">ℹ️
+                                    <span class="tooltiptext">Encuentre este valor en su recibo de energía</span>
+                                </span>
+                            </label>
+                            <input type="number" id="electricity-rate" placeholder="Ej: 650" value="650">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Calculation Method -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Paso 2: Método de Cálculo</h2>
+                    </div>
+                    <div class="method-selector">
+                        <div class="method-card active" data-method="devices">
+                            <div class="method-icon">⚡</div>
+                            <h3>Por Equipos</h3>
+                            <p>Selecciona tus electrodomésticos</p>
+                        </div>
+                        <div class="method-card" data-method="consumption">
+                            <div class="method-icon">📊</div>
+                            <h3>Por Consumo</h3>
+                            <p>Usa tu recibo de luz</p>
+                        </div>
+                    </div>
+
+                    <!-- Devices Method -->
+                    <div id="devices-method" class="method-content active">
+                        <h3>Selecciona tus equipos</h3>
+                        
+                        <!-- Selected Devices Summary -->
+                        <div id="selected-devices-summary" class="devices-summary" style="display: none;">
+                            <h4>Equipos seleccionados:</h4>
+                            <div id="selected-devices-list"></div>
+                            <div class="summary-total">
+                                <span>Consumo diario total:</span>
+                                <span id="daily-consumption-total">0 kWh</span>
+                            </div>
+                        </div>
+
+                        <!-- Device Grid -->
+                        <div class="devices-grid">
+                            <!-- Refrigeración -->
+                            <div class="device-category">
+                                <h4>Refrigeración</h4>
+                                <div class="device-items">
+                                    <div class="device-item" data-device="nevera-estandar" data-power="400" data-icon="❄️">
+                                        <div class="device-icon">❄️</div>
+                                        <div class="device-name">Nevera estándar</div>
+                                        <div class="device-power">400W</div>
+                                    </div>
+                                    <div class="device-item" data-device="nevera-eficiente" data-power="200" data-icon="❄️">
+                                        <div class="device-icon">❄️</div>
+                                        <div class="device-name">Nevera eficiente</div>
+                                        <div class="device-power">200W</div>
+                                    </div>
+                                    <div class="device-item" data-device="aire-pequeno" data-power="900" data-icon="🌡️">
+                                        <div class="device-icon">🌡️</div>
+                                        <div class="device-name">Aire pequeño</div>
+                                        <div class="device-power">900W</div>
+                                    </div>
+                                    <div class="device-item" data-device="aire-mediano" data-power="1500" data-icon="🌡️">
+                                        <div class="device-icon">🌡️</div>
+                                        <div class="device-name">Aire mediano</div>
+                                        <div class="device-power">1500W</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Entretenimiento -->
+                            <div class="device-category">
+                                <h4>Entretenimiento</h4>
+                                <div class="device-items">
+                                    <div class="device-item" data-device="tv-led-32" data-power="60" data-icon="📺">
+                                        <div class="device-icon">📺</div>
+                                        <div class="device-name">TV LED 32"</div>
+                                        <div class="device-power">60W</div>
+                                    </div>
+                                    <div class="device-item" data-device="tv-led-55" data-power="120" data-icon="📺">
+                                        <div class="device-icon">📺</div>
+                                        <div class="device-name">TV LED 55"</div>
+                                        <div class="device-power">120W</div>
+                                    </div>
+                                    <div class="device-item" data-device="computador" data-power="300" data-icon="💻">
+                                        <div class="device-icon">💻</div>
+                                        <div class="device-name">Computador</div>
+                                        <div class="device-power">300W</div>
+                                    </div>
+                                    <div class="device-item" data-device="consola" data-power="150" data-icon="🎮">
+                                        <div class="device-icon">🎮</div>
+                                        <div class="device-name">Consola juegos</div>
+                                        <div class="device-power">150W</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Electrodomésticos -->
+                            <div class="device-category">
+                                <h4>Electrodomésticos</h4>
+                                <div class="device-items">
+                                    <div class="device-item" data-device="lavadora" data-power="500" data-icon="🌊">
+                                        <div class="device-icon">🌊</div>
+                                        <div class="device-name">Lavadora</div>
+                                        <div class="device-power">500W</div>
+                                    </div>
+                                    <div class="device-item" data-device="microondas" data-power="1000" data-icon="📦">
+                                        <div class="device-icon">📦</div>
+                                        <div class="device-name">Microondas</div>
+                                        <div class="device-power">1000W</div>
+                                    </div>
+                                    <div class="device-item" data-device="licuadora" data-power="400" data-icon="🥤">
+                                        <div class="device-icon">🥤</div>
+                                        <div class="device-name">Licuadora</div>
+                                        <div class="device-power">400W</div>
+                                    </div>
+                                    <div class="device-item" data-device="plancha" data-power="1200" data-icon="👔">
+                                        <div class="device-icon">👔</div>
+                                        <div class="device-name">Plancha</div>
+                                        <div class="device-power">1200W</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Iluminación -->
+                            <div class="device-category">
+                                <h4>Iluminación</h4>
+                                <div class="device-items">
+                                    <div class="device-item" data-device="bombillo-led" data-power="10" data-icon="💡">
+                                        <div class="device-icon">💡</div>
+                                        <div class="device-name">Bombillo LED</div>
+                                        <div class="device-power">10W</div>
+                                    </div>
+                                    <div class="device-item" data-device="lampara-escritorio" data-power="20" data-icon="🔦">
+                                        <div class="device-icon">🔦</div>
+                                        <div class="device-name">Lámpara escritorio</div>
+                                        <div class="device-power">20W</div>
+                                    </div>
+                                    <div class="device-item" data-device="reflector-led" data-power="50" data-icon="🔆">
+                                        <div class="device-icon">🔆</div>
+                                        <div class="device-name">Reflector LED</div>
+                                        <div class="device-power">50W</div>
+                                    </div>
+                                    <div class="device-item" data-device="tira-led" data-power="30" data-icon="✨">
+                                        <div class="device-icon">✨</div>
+                                        <div class="device-name">Tira LED</div>
+                                        <div class="device-power">30W</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Otros -->
+                            <div class="device-category">
+                                <h4>Otros</h4>
+                                <div class="device-items">
+                                    <div class="device-item" data-device="ventilador" data-power="75" data-icon="🌀">
+                                        <div class="device-icon">🌀</div>
+                                        <div class="device-name">Ventilador</div>
+                                        <div class="device-power">75W</div>
+                                    </div>
+                                    <div class="device-item" data-device="router-wifi" data-power="10" data-icon="📡">
+                                        <div class="device-icon">📡</div>
+                                        <div class="device-name">Router WiFi</div>
+                                        <div class="device-power">10W</div>
+                                    </div>
+                                    <div class="device-item" data-device="cargador-celular" data-power="15" data-icon="🔌">
+                                        <div class="device-icon">🔌</div>
+                                        <div class="device-name">Cargador celular</div>
+                                        <div class="device-power">15W</div>
+                                    </div>
+                                    <div class="device-item custom-device" data-device="custom">
+                                        <div class="device-icon">➕</div>
+                                        <div class="device-name">Personalizado</div>
+                                        <div class="device-power">?W</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Consumption Method -->
+                    <div id="consumption-method" class="method-content">
+                        <h3>Ingresa tu consumo mensual</h3>
+                        <div class="consumption-helper">
+                            <div class="helper-card">
+                                <h4>¿Dónde encontrar este dato?</h4>
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250'%3E%3Crect width='400' height='250' fill='%23f3f4f6'/%3E%3Crect x='20' y='20' width='360' height='210' fill='white' stroke='%23e5e7eb' stroke-width='2'/%3E%3Ctext x='200' y='50' text-anchor='middle' font-size='18' font-weight='bold'%3ERecibo de Energía%3C/text%3E%3Cline x1='40' y1='70' x2='360' y2='70' stroke='%23e5e7eb'/%3E%3Ctext x='50' y='100' font-size='14'%3EConsumo del período:%3C/text%3E%3Crect x='200' y='85' width='80' height='25' fill='%23fef3c7' stroke='%23f59e0b'/%3E%3Ctext x='240' y='102' text-anchor='middle' font-size='16' font-weight='bold'%3E250 kWh%3C/text%3E%3Ctext x='50' y='140' font-size='14'%3EValor kWh:%3C/text%3E%3Ctext x='200' y='140' font-size='14'%3E$650%3C/text%3E%3C/svg%3E" alt="Ejemplo recibo">
+                                <p>El consumo mensual aparece en tu recibo como "Consumo del período" o "kWh consumidos"</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="monthly-consumption">Consumo Mensual (kWh)</label>
+                            <input type="number" id="monthly-consumption" placeholder="Ejemplo: 250" class="large-input">
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-calculate" onclick="calculateSystem()">
+                        <span class="btn-icon">🔍</span>
+                        Calcular Sistema Solar
+                    </button>
+                </div>
+
+                <!-- Results -->
+                <div id="results-section" style="display: none;">
+                    <!-- System Comparison -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Comparación de Sistemas</h2>
+                        </div>
+                        <div class="system-comparison">
+                            <div class="system-option on-grid">
+                                <h3>Sistema On-Grid (Conectado a Red)</h3>
+                                <div class="system-features">
+                                    <div class="feature">✅ Venta de excedentes</div>
+                                    <div class="feature">✅ Menor inversión inicial</div>
+                                    <div class="feature">✅ Sin mantenimiento de baterías</div>
+                                    <div class="feature">❌ Sin energía en cortes</div>
+                                </div>
+                                <div class="system-components">
+                                    <h4>Componentes del Sistema</h4>
+                                    <div id="ongrid-components"></div>
+                                </div>
+                                <div class="system-total">
+                                    <span>Inversión Total:</span>
+                                    <span id="ongrid-total">$0</span>
+                                </div>
+                            </div>
+
+                            <div class="system-option off-grid">
+                                <h3>Sistema Off-Grid (Aislado)</h3>
+                                <div class="system-features">
+                                    <div class="feature">✅ Independencia total</div>
+                                    <div class="feature">✅ Energía 24/7</div>
+                                    <div class="feature">✅ Ideal zonas rurales</div>
+                                    <div class="feature">❌ Mayor inversión</div>
+                                </div>
+                                <div class="system-components">
+                                    <h4>Componentes del Sistema</h4>
+                                    <div id="offgrid-components"></div>
+                                </div>
+                                <div class="system-total">
+                                    <span>Inversión Total:</span>
+                                    <span id="offgrid-total">$0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Diagram -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Esquema de Conexión</h2>
+                        </div>
+                        <div class="diagram-tabs">
+                            <button class="diagram-tab active" onclick="showDiagram('ongrid')">Sistema On-Grid</button>
+                            <button class="diagram-tab" onclick="showDiagram('offgrid')">Sistema Off-Grid</button>
+                        </div>
+                        <div id="system-diagram" class="system-diagram">
+                            <!-- SVG diagram will be inserted here -->
+                        </div>
+                    </div>
+
+                    <!-- Financial Analysis -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Análisis Financiero</h2>
+                        </div>
+                        <div class="financial-tabs">
+                            <button class="financial-tab active" onclick="showFinancialAnalysis('ongrid')">On-Grid</button>
+                            <button class="financial-tab" onclick="showFinancialAnalysis('offgrid')">Off-Grid</button>
+                        </div>
+                        <div class="financial-content">
+                            <div class="financial-metrics">
+                                <div class="metric-card">
+                                    <div class="metric-label">Ahorro Mensual</div>
+                                    <div class="metric-value" id="monthly-savings">$0</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-label">Retorno de Inversión</div>
+                                    <div class="metric-value" id="roi-years">0 años</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-label">TIR a 20 años</div>
+                                    <div class="metric-value" id="irr-percentage">0%</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-label">Ahorro Total (20 años)</div>
+                                    <div class="metric-value" id="total-savings">$0</div>
+                                </div>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="financial-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Environmental Impact -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Impacto Ambiental</h2>
+                        </div>
+                        <div class="environmental-impact">
+                            <div class="impact-metric">
+                                <div class="impact-icon">🌳</div>
+                                <div class="impact-value" id="co2-reduction">0</div>
+                                <div class="impact-label">kg CO₂ evitados/año</div>
+                            </div>
+                            <div class="impact-metric">
+                                <div class="impact-icon">🌲</div>
+                                <div class="impact-value" id="trees-equivalent">0</div>
+                                <div class="impact-label">árboles equivalentes</div>
+                            </div>
+                            <div class="impact-metric">
+                                <div class="impact-icon">🚗</div>
+                                <div class="impact-value" id="cars-equivalent">0</div>
+                                <div class="impact-label">km en auto evitados</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Regulations Section -->
+            <section id="regulations" class="section">
+                <div class="section-header">
+                    <h1>Marco Regulatorio Colombiano</h1>
+                    <p>Normativas y procedimientos para sistemas fotovoltaicos</p>
+                </div>
+
+                <div class="regulations-grid">
+                    <!-- Leyes Principales -->
+                    <div class="card regulation-card">
+                        <div class="card-header">
+                            <h2>📜 Leyes y Decretos Principales</h2>
+                        </div>
+                        <div class="regulation-list">
+                            <div class="regulation-item">
+                                <h4>Ley 1715 de 2014</h4>
+                                <p>Regula la integración de las energías renovables no convencionales al Sistema Energético Nacional.</p>
+                                <a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=57353" target="_blank" class="regulation-link">
+                                    Ver documento oficial →
+                                </a>
+                            </div>
+                            <div class="regulation-item">
+                                <h4>Decreto 348 de 2017</h4>
+                                <p>Establece los lineamientos de política pública en materia de gestión eficiente de la energía.</p>
+                                <a href="https://www.minenergia.gov.co/documents/10180/23517/37122-Decreto-348-01Mar2017.pdf" target="_blank" class="regulation-link">
+                                    Ver documento oficial →
+                                </a>
+                            </div>
+                            <div class="regulation-item">
+                                <h4>Decreto 570 de 2018</h4>
+                                <p>Establece los lineamientos de política pública para la contratación a largo plazo de proyectos de generación con FNCER.</p>
+                                <a href="https://www.minenergia.gov.co/es/normativa/decreto-570-de-2018/" target="_blank" class="regulation-link">
+                                    Ver documento oficial →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resoluciones CREG -->
+                    <div class="card regulation-card">
+                        <div class="card-header">
+                            <h2>⚡ Resoluciones CREG</h2>
+                        </div>
+                        <div class="regulation-list">
+                            <div class="regulation-item">
+                                <h4>Resolución CREG 030 de 2018</h4>
+                                <p>Regula las actividades de autogeneración a pequeña escala y de generación distribuida en el Sistema Interconectado Nacional.</p>
+                                <a href="https://www.creg.gov.co/resoluciones/2018/Resolucion_030_de_2018.pdf" target="_blank" class="regulation-link">
+                                    Ver resolución →
+                                </a>
+                            </div>
+                            <div class="regulation-item">
+                                <h4>Resolución CREG 038 de 2014</h4>
+                                <p>Código de medida del sistema interconectado nacional.</p>
+                                <a href="https://www.creg.gov.co/resoluciones/2014/Resolucion_038_de_2014.pdf" target="_blank" class="regulation-link">
+                                    Ver resolución →
+                                </a>
+                            </div>
+                            <div class="regulation-item">
+                                <h4>Resolución CREG 174 de 2021</h4>
+                                <p>Procedimiento para la conexión y operación de autogeneradores conectados al SIN.</p>
+                                <a href="https://www.creg.gov.co/resoluciones/2021/Resolucion_174_de_2021.pdf" target="_blank" class="regulation-link">
+                                    Ver resolución →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Normas Técnicas -->
+                    <div class="card regulation-card">
+                        <div class="card-header">
+                            <h2>🔧 Normas Técnicas</h2>
+                        </div>
+                        <div class="regulation-list">
+                            <div class="regulation-item">
+                                <h4>RETIE - Reglamento Técnico de Instalaciones Eléctricas</h4>
+                                <p>Establece las medidas para garantizar la seguridad de las personas, vida animal y vegetal y la preservación del medio ambiente.</p>
+                                <a href="https://www.minenergia.gov.co/retie" target="_blank" class="regulation-link">
+                                    Consultar RETIE →
+                                </a>
+                            </div>
+                            <div class="regulation-item">
+                                <h4>NTC 2050 - Código Eléctrico Colombiano</h4>
+                                <p>Norma técnica para instalaciones eléctricas basada en el NFPA 70.</p>
+                                <a href="https://tienda.icontec.org/gp-codigo-electrico-colombiano-ntc2050-2020-pdf-p2050-20.html" target="_blank" class="regulation-link">
+                                    Ver en ICONTEC →
+                                </a>
+                            </div>
+                            <div class="regulation-item">
+                                <h4>NTC 5287 - Sistemas Fotovoltaicos</h4>
+                                <p>Especificaciones técnicas para sistemas fotovoltaicos autónomos.</p>
+                                <a href="https://tienda.icontec.org/gp-energia-solar-fotovoltaica-sistemas-autonomos-ntc5287-2018.html" target="_blank" class="regulation-link">
+                                    Ver en ICONTEC →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Incentivos -->
+                    <div class="card regulation-card highlight-card">
+                        <div class="card-header">
+                            <h2>💰 Incentivos Tributarios</h2>
+                        </div>
+                        <div class="incentive-list">
+                            <div class="incentive-item">
+                                <div class="incentive-icon">🎯</div>
+                                <h4>Exclusión de IVA</h4>
+                                <p>0% IVA para equipos, elementos y maquinaria destinados a proyectos de FNCER.</p>
+                            </div>
+                            <div class="incentive-item">
+                                <div class="incentive-icon">📊</div>
+                                <h4>Depreciación Acelerada</h4>
+                                <p>Hasta el 33.33% anual de depreciación para activos de generación con FNCER.</p>
+                            </div>
+                            <div class="incentive-item">
+                                <div class="incentive-icon">💵</div>
+                                <h4>Deducción en Renta</h4>
+                                <p>Hasta 50% del valor de la inversión deducible en el período gravable.</p>
+                            </div>
+                            <div class="incentive-item">
+                                <div class="incentive-icon">🚢</div>
+                                <h4>Exención Arancelaria</h4>
+                                <p>0% arancel para importación de equipos de FNCER no producidos en Colombia.</p>
+                            </div>
+                        </div>
+                        <div class="incentive-process">
+                            <h4>Proceso para acceder a incentivos:</h4>
+                            <ol>
+                                <li>Inscribir el proyecto ante la UPME</li>
+                                <li>Obtener certificación de la UPME</li>
+                                <li>Presentar certificación ante la DIAN</li>
+                                <li>Aplicar beneficios en declaraciones tributarias</li>
+                            </ol>
+                            <a href="https://www1.upme.gov.co/Incentivos/Paginas/Incentivos-tributarios.aspx" target="_blank" class="btn btn-secondary">
+                                Guía completa UPME →
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Procedimiento de Conexión -->
+                    <div class="card regulation-card">
+                        <div class="card-header">
+                            <h2>🔌 Procedimiento de Conexión</h2>
+                        </div>
+                        <div class="connection-process">
+                            <div class="process-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Solicitud de Factibilidad</h4>
+                                    <p>Presentar solicitud al Operador de Red con información técnica del proyecto.</p>
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Estudio de Conexión</h4>
+                                    <p>El OR evalúa capacidad de la red y define punto de conexión.</p>
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>Aprobación del Proyecto</h4>
+                                    <p>Presentar diseños detallados y obtener aprobación técnica.</p>
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h4>Instalación</h4>
+                                    <p>Ejecutar obra con personal certificado CONTE.</p>
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">5</div>
+                                <div class="step-content">
+                                    <h4>Inspección RETIE</h4>
+                                    <p>Certificación de cumplimiento RETIE por organismo acreditado.</p>
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">6</div>
+                                <div class="step-content">
+                                    <h4>Contrato de Conexión</h4>
+                                    <p>Firma del contrato de conexión con el OR.</p>
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">7</div>
+                                <div class="step-content">
+                                    <h4>Medidor Bidireccional</h4>
+                                    <p>Instalación del medidor bidireccional por el OR.</p>
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">8</div>
+                                <div class="step-content">
+                                    <h4>Puesta en Servicio</h4>
+                                    <p>Inicio de operación y venta de excedentes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Enlaces Útiles -->
+                    <div class="card regulation-card">
+                        <div class="card-header">
+                            <h2>🔗 Enlaces Útiles</h2>
+                        </div>
+                        <div class="useful-links">
+                            <a href="https://www.minenergia.gov.co/" target="_blank" class="link-item">
+                                <span class="link-icon">🏛️</span>
+                                <div>
+                                    <h4>Ministerio de Minas y Energía</h4>
+                                    <p>Políticas energéticas nacionales</p>
+                                </div>
+                            </a>
+                            <a href="https://www.creg.gov.co/" target="_blank" class="link-item">
+                                <span class="link-icon">⚖️</span>
+                                <div>
+                                    <h4>CREG</h4>
+                                    <p>Comisión de Regulación de Energía y Gas</p>
+                                </div>
+                            </a>
+                            <a href="https://www1.upme.gov.co/" target="_blank" class="link-item">
+                                <span class="link-icon">📊</span>
+                                <div>
+                                    <h4>UPME</h4>
+                                    <p>Unidad de Planeación Minero Energética</p>
+                                </div>
+                            </a>
+                            <a href="https://www.ser-colombia.org/" target="_blank" class="link-item">
+                                <span class="link-icon">☀️</span>
+                                <div>
+                                    <h4>SER Colombia</h4>
+                                    <p>Asociación de Energías Renovables</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Learning Section -->
+            <section id="learning" class="section">
+                <div class="section-header">
+                    <h1>Curso de Energía Solar Fotovoltaica</h1>
+                    <p>Aprende todo sobre sistemas solares de forma práctica y profesional</p>
+                </div>
+
+                <!-- Course Overview -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Estructura del Curso</h2>
+                    </div>
+                    <div class="course-overview">
+                        <div class="course-stats">
+                            <div class="stat">
+                                <span class="stat-value">8</span>
+                                <span class="stat-label">Módulos</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">32</span>
+                                <span class="stat-label">Lecciones</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">16</span>
+                                <span class="stat-label">Horas</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">12</span>
+                                <span class="stat-label">Ejercicios</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Modules -->
+                <div class="course-modules">
+                    <!-- Module 1 -->
+                    <div class="module-card">
+                        <div class="module-header" onclick="toggleModule('module1')">
+                            <div class="module-info">
+                                <span class="module-number">Módulo 1</span>
+                                <h3>Introducción a la Energía Solar</h3>
+                                <span class="module-duration">2 horas</span>
+                            </div>
+                            <span class="module-toggle">▼</span>
+                        </div>
+                        <div id="module1" class="module-content" style="display: none;">
+                            <div class="lesson-list">
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">📚</span>
+                                    <div class="lesson-info">
+                                        <h4>1.1 Historia y evolución de la energía solar</h4>
+                                        <p>Desde el efecto fotovoltaico hasta la actualidad</p>
+                                    </div>
+                                    <span class="lesson-duration">15 min</span>
+                                </div>
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">🌍</span>
+                                    <div class="lesson-info">
+                                        <h4>1.2 Contexto energético mundial y colombiano</h4>
+                                        <p>Matriz energética y potencial solar en Colombia</p>
+                                    </div>
+                                    <span class="lesson-duration">20 min</span>
+                                </div>
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">☀️</span>
+                                    <div class="lesson-info">
+                                        <h4>1.3 Fundamentos de radiación solar</h4>
+                                        <p>Irradiancia, HSP y factores climáticos</p>
+                                    </div>
+                                    <span class="lesson-duration">25 min</span>
+                                </div>
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">💡</span>
+                                    <div class="lesson-info">
+                                        <h4>1.4 Principio fotovoltaico</h4>
+                                        <p>Cómo los fotones se convierten en electricidad</p>
+                                    </div>
+                                    <span class="lesson-duration">30 min</span>
+                                </div>
+                                <div class="lesson-item exercise">
+                                    <span class="lesson-icon">✏️</span>
+                                    <div class="lesson-info">
+                                        <h4>Ejercicio 1: Cálculo de radiación solar</h4>
+                                        <p>Determinar HSP para diferentes ciudades</p>
+                                    </div>
+                                    <span class="lesson-duration">30 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Module 2 -->
+                    <div class="module-card">
+                        <div class="module-header" onclick="toggleModule('module2')">
+                            <div class="module-info">
+                                <span class="module-number">Módulo 2</span>
+                                <h3>Componentes del Sistema Fotovoltaico</h3>
+                                <span class="module-duration">3 horas</span>
+                            </div>
+                            <span class="module-toggle">▼</span>
+                        </div>
+                        <div id="module2" class="module-content" style="display: none;">
+                            <div class="lesson-list">
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">🔲</span>
+                                    <div class="lesson-info">
+                                        <h4>2.1 Paneles solares</h4>
+                                        <p>Tipos, tecnologías y características técnicas</p>
+                                    </div>
+                                    <span class="lesson-duration">40 min</span>
+                                </div>
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">🔄</span>
+                                    <div class="lesson-info">
+                                        <h4>2.2 Inversores</h4>
+                                        <p>String, centrales, microinversores y optimizadores</p>
+                                    </div>
+                                    <span class="lesson-duration">35 min</span>
+                                </div>
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">🔋</span>
+                                    <div class="lesson-info">
+                                        <h4>2.3 Baterías y almacenamiento</h4>
+                                        <p>Tecnologías, dimensionamiento y gestión</p>
+                                    </div>
+                                    <span class="lesson-duration">45 min</span>
+                                </div>
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">⚡</span>
+                                    <div class="lesson-info">
+                                        <h4>2.4 Controladores de carga</h4>
+                                        <p>PWM vs MPPT, selección y configuración</p>
+                                    </div>
+                                    <span class="lesson-duration">30 min</span>
+                                </div>
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">🏗️</span>
+                                    <div class="lesson-info">
+                                        <h4>2.5 Estructuras y cableado</h4>
+                                        <p>Montaje, orientación y protecciones eléctricas</p>
+                                    </div>
+                                    <span class="lesson-duration">25 min</span>
+                                </div>
+                                <div class="lesson-item exercise">
+                                    <span class="lesson-icon">✏️</span>
+                                    <div class="lesson-info">
+                                        <h4>Ejercicio 2: Selección de componentes</h4>
+                                        <p>Elegir equipos para un sistema específico</p>
+                                    </div>
+                                    <span class="lesson-duration">45 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Module 3 -->
+                    <div class="module-card">
+                        <div class="module-header" onclick="toggleModule('module3')">
+                            <div class="module-info">
+                                <span class="module-number">Módulo 3</span>
+                                <h3>Diseño de Sistemas On-Grid</h3>
+                                <span class="module-duration">2.5 horas</span>
+                            </div>
+                            <span class="module-toggle">▼</span>
+                        </div>
+                        <div id="module3" class="module-content" style="display: none;">
+                            <div class="lesson-list">
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">📐</span>
+                                    <div class="lesson-info">
+                                        <h4>3.1 Dimensionamiento del sistema</h4>
+                                        <p>Cálculo de potencia y número de paneles</p>
+                                    </div>
+                                    <span class="lesson-duration">30 min</span>
+                                </div>
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">🔌</span>
+                                    <div class="lesson-info">
+                                        <h4>3.2 Configuración de strings</h4>
+                                        <p>Serie, paralelo y compatibilidad con inversor</p>
+                                    </div>
+                                    <span class="lesson-duration">35 min</span>
+                                </div>
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">🛡️</span>
+                                    <div class="lesson-info">
+                                        <h4>3.3 Protecciones eléctricas</h4>
+                                        <p>DC, AC, puesta a tierra y sobretensiones</p>
+                                    </div>
+                                    <span class="lesson-duration">30 min</span>
+                                </div>
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">📊</span>
+                                    <div class="lesson-info">
+                                        <h4>3.4 Conexión a red y medición</h4>
+                                        <p>Medidor bidireccional y esquemas de conexión</p>
+                                    </div>
+                                    <span class="lesson-duration">25 min</span>
+                                </div>
+                                <div class="lesson-item exercise">
+                                    <span class="lesson-icon">✏️</span>
+                                    <div class="lesson-info">
+                                        <h4>Ejercicio 3: Diseño completo on-grid</h4>
+                                        <p>Proyecto residencial de 5kW</p>
+                                    </div>
+                                    <span class="lesson-duration">60 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Module 4 -->
+                    <div class="module-card">
+                        <div class="module-header" onclick="toggleModule('module4')">
+                            <div class="module-info">
+                                <span class="module-number">Módulo 4</span>
+                                <h3>Diseño de Sistemas Off-Grid</h3>
+                                <span class="module-duration">3 horas</span>
+                            </div>
+                            <span class="module-toggle">▼</span>
+                        </div>
+                        <div id="module4" class="module-content" style="display: none;">
+                            <div class="lesson-list">
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">📈</span>
+                                    <div class="lesson-info">
+                                        <h4>4.1 Análisis de cargas y consumo</h4>
+                                        <p>Levantamiento y caracterización de cargas</p>
+                                    </div>
+                                    <span class="lesson-duration">30 min</span>
+                                </div>
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">🔋</span>
+                                    <div class="lesson-info">
+                                        <h4>4.2 Dimensionamiento del banco de baterías</h4>
+                                        <p>Autonomía, DoD y configuración</p>
+                                    </div>
+                                    <span class="lesson-duration">45 min</span>
+                                </div>
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">⚙️</span>
+                                    <div class="lesson-info">
+                                        <h4>4.3 Selección de controlador e inversor</h4>
+                                        <p>Capacidades y compatibilidad del sistema</p>
+                                    </div>
+                                    <span class="lesson-duration">35 min</span>
+                                </div>
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">🔧</span>
+                                    <div class="lesson-info">
+                                        <h4>4.4 Sistemas híbridos</h4>
+                                        <p>Integración con generadores y red</p>
+                                    </div>
+                                    <span class="lesson-duration">40 min</span>
+                                </div>
+                                <div class="lesson-item exercise">
+                                    <span class="lesson-icon">✏️</span>
+                                    <div class="lesson-info">
+                                        <h4>Ejercicio 4: Sistema off-grid rural</h4>
+                                        <p>Diseño para vivienda sin acceso a red</p>
+                                    </div>
+                                    <span class="lesson-duration">60 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Module 5 -->
+                    <div class="module-card">
+                        <div class="module-header" onclick="toggleModule('module5')">
+                            <div class="module-info">
+                                <span class="module-number">Módulo 5</span>
+                                <h3>Instalación y Montaje</h3>
+                                <span class="module-duration">2 horas</span>
+                            </div>
+                            <span class="module-toggle">▼</span>
+                        </div>
+                        <div id="module5" class="module-content" style="display: none;">
+                            <div class="lesson-list">
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">🏠</span>
+                                    <div class="lesson-info">
+                                        <h4>5.1 Evaluación del sitio</h4>
+                                        <p>Análisis de sombras y estructura del techo</p>
+                                    </div>
+                                    <span class="lesson-duration">25 min</span>
+                                </div>
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">🔨</span>
+                                    <div class="lesson-info">
+                                        <h4>5.2 Montaje de estructuras</h4>
+                                        <p>Tipos de anclaje y orientación óptima</p>
+                                    </div>
+                                    <span class="lesson-duration">35 min</span>
+                                </div>
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">⚡</span>
+                                    <div class="lesson-info">
+                                        <h4>5.3 Conexiones eléctricas</h4>
+                                        <p>DC, AC y puesta a tierra</p>
+                                    </div>
+                                    <span class="lesson-duration">30 min</span>
+                                </div>
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">✅</span>
+                                    <div class="lesson-info">
+                                        <h4>5.4 Puesta en marcha</h4>
+                                        <p>Verificaciones y configuración inicial</p>
+                                    </div>
+                                    <span class="lesson-duration">30 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Module 6 -->
+                    <div class="module-card">
+                        <div class="module-header" onclick="toggleModule('module6')">
+                            <div class="module-info">
+                                <span class="module-number">Módulo 6</span>
+                                <h3>Normativa y Regulación</h3>
+                                <span class="module-duration">1.5 horas</span>
+                            </div>
+                            <span class="module-toggle">▼</span>
+                        </div>
+                        <div id="module6" class="module-content" style="display: none;">
+                            <div class="lesson-list">
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">📜</span>
+                                    <div class="lesson-info">
+                                        <h4>6.1 Marco regulatorio colombiano</h4>
+                                        <p>Ley 1715, CREG 030 y normativa vigente</p>
+                                    </div>
+                                    <span class="lesson-duration">30 min</span>
+                                </div>
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">🔌</span>
+                                    <div class="lesson-info">
+                                        <h4>6.2 RETIE y NTC 2050</h4>
+                                        <p>Requisitos técnicos y de seguridad</p>
+                                    </div>
+                                    <span class="lesson-duration">30 min</span>
+                                </div>
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">💰</span>
+                                    <div class="lesson-info">
+                                        <h4>6.3 Incentivos tributarios</h4>
+                                        <p>Beneficios y proceso de aplicación</p>
+                                    </div>
+                                    <span class="lesson-duration">30 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Module 7 -->
+                    <div class="module-card">
+                        <div class="module-header" onclick="toggleModule('module7')">
+                            <div class="module-info">
+                                <span class="module-number">Módulo 7</span>
+                                <h3>Análisis Financiero</h3>
+                                <span class="module-duration">2 horas</span>
+                            </div>
+                            <span class="module-toggle">▼</span>
+                        </div>
+                        <div id="module7" class="module-content" style="display: none;">
+                            <div class="lesson-list">
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">💵</span>
+                                    <div class="lesson-info">
+                                        <h4>7.1 Costos del sistema</h4>
+                                        <p>CAPEX, OPEX y estructura de costos</p>
+                                    </div>
+                                    <span class="lesson-duration">30 min</span>
+                                </div>
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">📊</span>
+                                    <div class="lesson-info">
+                                        <h4>7.2 Indicadores financieros</h4>
+                                        <p>TIR, VPN, Payback y LCOE</p>
+                                    </div>
+                                    <span class="lesson-duration">40 min</span>
+                                </div>
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">🏦</span>
+                                    <div class="lesson-info">
+                                        <h4>7.3 Opciones de financiamiento</h4>
+                                        <p>Créditos verdes, leasing y modelos de negocio</p>
+                                    </div>
+                                    <span class="lesson-duration">30 min</span>
+                                </div>
+                                <div class="lesson-item exercise">
+                                    <span class="lesson-icon">✏️</span>
+                                    <div class="lesson-info">
+                                        <h4>Ejercicio 5: Análisis financiero completo</h4>
+                                        <p>Evaluación de proyecto residencial</p>
+                                    </div>
+                                    <span class="lesson-duration">40 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Module 8 -->
+                    <div class="module-card">
+                        <div class="module-header" onclick="toggleModule('module8')">
+                            <div class="module-info">
+                                <span class="module-number">Módulo 8</span>
+                                <h3>Mantenimiento y Monitoreo</h3>
+                                <span class="module-duration">1.5 horas</span>
+                            </div>
+                            <span class="module-toggle">▼</span>
+                        </div>
+                        <div id="module8" class="module-content" style="display: none;">
+                            <div class="lesson-list">
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">🔧</span>
+                                    <div class="lesson-info">
+                                        <h4>8.1 Mantenimiento preventivo</h4>
+                                        <p>Rutinas y frecuencias recomendadas</p>
+                                    </div>
+                                    <span class="lesson-duration">25 min</span>
+                                </div>
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">🔍</span>
+                                    <div class="lesson-info">
+                                        <h4>8.2 Diagnóstico de fallas</h4>
+                                        <p>Problemas comunes y soluciones</p>
+                                    </div>
+                                    <span class="lesson-duration">35 min</span>
+                                </div>
+                                <div class="lesson-item">
+                                    <span class="lesson-icon">📱</span>
+                                    <div class="lesson-info">
+                                        <h4>8.3 Sistemas de monitoreo</h4>
+                                        <p>Plataformas y análisis de rendimiento</p>
+                                    </div>
+                                    <span class="lesson-duration">30 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Resources -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Recursos del Curso</h2>
+                    </div>
+                    <div class="resources-grid">
+                        <div class="resource-item">
+                            <span class="resource-icon">📚</span>
+                            <h4>Manual del Estudiante</h4>
+                            <p>Guía completa con teoría y ejercicios</p>
+                            <button class="btn btn-secondary">Descargar PDF</button>
+                        </div>
+                        <div class="resource-item">
+                            <span class="resource-icon">🧮</span>
+                            <h4>Calculadoras Excel</h4>
+                            <p>Herramientas de diseño y dimensionamiento</p>
+                            <button class="btn btn-secondary">Descargar</button>
+                        </div>
+                        <div class="resource-item">
+                            <span class="resource-icon">📊</span>
+                            <h4>Casos de Estudio</h4>
+                            <p>Proyectos reales analizados</p>
+                            <button class="btn btn-secondary">Ver Casos</button>
+                        </div>
+                        <div class="resource-item">
+                            <span class="resource-icon">🎥</span>
+                            <h4>Videos Prácticos</h4>
+                            <p>Demostraciones de instalación</p>
+                            <button class="btn btn-secondary">Ver Videos</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Financing Section -->
+            <section id="financing" class="section">
+                <div class="section-header">
+                    <h1>Opciones de Financiamiento</h1>
+                    <p>Encuentra la mejor forma de financiar tu sistema solar</p>
+                </div>
+
+                <!-- Financing Mode Selector -->
+                <div class="card">
+                    <div class="financing-mode-selector">
+                        <button class="mode-btn active" onclick="setFinancingMode('basic')">
+                            <span class="mode-icon">🏠</span>
+                            <span class="mode-label">Básico</span>
+                            <span class="mode-desc">Cálculo rápido</span>
+                        </button>
+                        <button class="mode-btn" onclick="setFinancingMode('advanced')">
+                            <span class="mode-icon">🏢</span>
+                            <span class="mode-label">Avanzado</span>
+                            <span class="mode-desc">Análisis detallado</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Basic Financing -->
+                <div id="basic-financing" class="financing-content active">
+                    <!-- Financing Options -->
+                    <div class="financing-options-grid">
+                        <div class="financing-option-card">
+                            <div class="option-header green">
+                                <h3>🌿 Crédito Verde</h3>
+                                <span class="badge">Recomendado</span>
+                            </div>
+                            <div class="option-features">
+                                <div class="feature">✅ Tasa preferencial: 0.8% - 1.2% mensual</div>
+                                <div class="feature">✅ Plazo hasta 7 años</div>
+                                <div class="feature">✅ Sin cuota inicial</div>
+                                <div class="feature">✅ Período de gracia 6 meses</div>
+                            </div>
+                            <div class="banks-list">
+                                <h4>Bancos con Crédito Verde:</h4>
+                                <div class="bank-item">
+                                    <span>Bancolombia</span>
+                                    <a href="https://www.bancolombia.com/personas/creditos/consumo/credito-verde" target="_blank">Ver más →</a>
+                                </div>
+                                <div class="bank-item">
+                                    <span>Banco de Bogotá</span>
+                                    <a href="https://www.bancodebogota.com/wps/portal/banco-de-bogota/bogota/productos/para-ti/creditos/consumo/credito-verde" target="_blank">Ver más →</a>
+                                </div>
+                                <div class="bank-item">
+                                    <span>Davivienda</span>
+                                    <a href="https://www.davivienda.com/wps/portal/personas/nuevo/personas/aqui_puedo/creditos/consumo/credito_verde" target="_blank">Ver más →</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="financing-option-card">
+                            <div class="option-header blue">
+                                <h3>💼 Leasing Financiero</h3>
+                            </div>
+                            <div class="option-features">
+                                <div class="feature">✅ Cuotas 100% deducibles</div>
+                                <div class="feature">✅ Opción de compra al final</div>
+                                <div class="feature">✅ Sin afectar indicadores de deuda</div>
+                                <div class="feature">✅ Mantenimiento incluido</div>
+                            </div>
+                            <div class="providers-list">
+                                <h4>Proveedores de Leasing:</h4>
+                                <ul>
+                                    <li>Bancolombia Leasing</li>
+                                    <li>Leasing Bolívar</li>
+                                    <li>BBVA Leasing</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="financing-option-card">
+                            <div class="option-header orange">
+                                <h3>💰 Compra Directa</h3>
+                            </div>
+                            <div class="option-features">
+                                <div class="feature">✅ Mayor retorno de inversión</div>
+                                <div class="feature">✅ Propiedad inmediata</div>
+                                <div class="feature">✅ Beneficios tributarios completos</div>
+                                <div class="feature">✅ Sin intereses</div>
+                            </div>
+                            <div class="financing-tip">
+                                <p><strong>Tip:</strong> Ideal si tienes liquidez disponible o acceso a recursos propios.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Basic Calculator -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Calculadora de Financiamiento Básica</h2>
+                        </div>
+                        <div class="grid grid-3">
+                            <div class="form-group">
+                                <label for="basic-loan-amount">Monto del Préstamo (COP)</label>
+                                <input type="number" id="basic-loan-amount" placeholder="Ej: 15000000">
+                            </div>
+                            <div class="form-group">
+                                <label for="basic-interest-rate">Tasa de Interés Mensual (%)</label>
+                                <input type="number" id="basic-interest-rate" placeholder="Ej: 1.0" step="0.1" value="1.0">
+                            </div>
+                            <div class="form-group">
+                                <label for="basic-loan-term">Plazo (años)</label>
+                                <input type="number" id="basic-loan-term" placeholder="Ej: 5" value="5">
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-primary" onclick="calculateBasicFinancing()">
+                            Calcular Financiamiento
+                        </button>
+                        
+                        <div id="basic-financing-results" style="display: none;">
+                            <div class="financing-results-grid">
+                                <div class="result-box">
+                                    <div class="result-label">Cuota Mensual</div>
+                                    <div class="result-value primary" id="basic-monthly-payment">$0</div>
+                                </div>
+                                <div class="result-box">
+                                    <div class="result-label">Total a Pagar</div>
+                                    <div class="result-value" id="basic-total-payment">$0</div>
+                                </div>
+                                <div class="result-box">
+                                    <div class="result-label">Total Intereses</div>
+                                    <div class="result-value" id="basic-total-interest">$0</div>
+                                </div>
+                                <div class="result-box">
+                                    <div class="result-label">Ahorro vs Tarifa Comercial</div>
+                                    <div class="result-value success" id="basic-savings">$0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advanced Financing -->
+                <div id="advanced-financing" class="financing-content">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Análisis Financiero Avanzado</h2>
+                        </div>
+                        
+                        <!-- Input Parameters -->
+                        <div class="advanced-params">
+                            <h3>Parámetros del Proyecto</h3>
+                            <div class="grid grid-3">
+                                <div class="form-group">
+                                    <label>Inversión Inicial (COP)</label>
+                                    <input type="number" id="adv-investment" placeholder="Ej: 25000000">
+                                </div>
+                                <div class="form-group">
+                                    <label>Generación Anual (kWh)</label>
+                                    <input type="number" id="adv-generation" placeholder="Ej: 6000">
+                                </div>
+                                <div class="form-group">
+                                    <label>Tarifa Eléctrica ($/kWh)</label>
+                                    <input type="number" id="adv-rate" placeholder="Ej: 650" value="650">
+                                </div>
+                            </div>
+
+                            <h3>Parámetros Financieros</h3>
+                            <div class="grid grid-3">
+                                <div class="form-group">
+                                    <label>Tasa de Descuento (%)</label>
+                                    <input type="number" id="adv-discount-rate" placeholder="Ej: 12" value="12">
+                                </div>
+                                <div class="form-group">
+                                    <label>Inflación Anual (%)</label>
+                                    <input type="number" id="adv-inflation" placeholder="Ej: 3.5" value="3.5">
+                                </div>
+                                <div class="form-group">
+                                    <label>Degradación Panel (%/año)</label>
+                                    <input type="number" id="adv-degradation" placeholder="Ej: 0.5" value="0.5">
+                                </div>
+                            </div>
+
+                            <h3>Estructura de Financiamiento</h3>
+                            <div class="grid grid-2">
+                                <div class="form-group">
+                                    <label>Capital Propio (%)</label>
+                                    <input type="number" id="adv-equity" placeholder="Ej: 30" value="30">
+                                </div>
+                                <div class="form-group">
+                                    <label>Deuda (%)</label>
+                                    <input type="number" id="adv-debt" placeholder="Ej: 70" value="70" readonly>
+                                </div>
+                            </div>
+
+                            <h3>Incentivos Tributarios</h3>
+                            <div class="incentives-checklist">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="incentive-iva" checked>
+                                    <span>Exclusión de IVA (19%)</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="incentive-renta" checked>
+                                    <span>Deducción en renta (50%)</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="incentive-depreciation" checked>
+                                    <span>Depreciación acelerada</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="incentive-arancel" checked>
+                                    <span>Exención arancelaria</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" onclick="calculateAdvancedFinancing()">
+                            Generar Análisis Completo
+                        </button>
+
+                        <!-- Advanced Results -->
+                        <div id="advanced-results" style="display: none;">
+                            <h3>Indicadores Financieros</h3>
+                            <div class="advanced-metrics-grid">
+                                <div class="metric-card advanced">
+                                    <div class="metric-icon">📊</div>
+                                    <div class="metric-label">VPN</div>
+                                    <div class="metric-value" id="adv-npv">$0</div>
+                                    <div class="metric-desc">Valor Presente Neto</div>
+                                </div>
+                                <div class="metric-card advanced">
+                                    <div class="metric-icon">📈</div>
+                                    <div class="metric-label">TIR</div>
+                                    <div class="metric-value" id="adv-irr">0%</div>
+                                    <div class="metric-desc">Tasa Interna de Retorno</div>
+                                </div>
+                                <div class="metric-card advanced">
+                                    <div class="metric-icon">⏱️</div>
+                                    <div class="metric-label">Payback</div>
+                                    <div class="metric-value" id="adv-payback">0 años</div>
+                                    <div class="metric-desc">Período de Recuperación</div>
+                                </div>
+                                <div class="metric-card advanced">
+                                    <div class="metric-icon">⚡</div>
+                                    <div class="metric-label">LCOE</div>
+                                    <div class="metric-value" id="adv-lcoe">$0/kWh</div>
+                                    <div class="metric-desc">Costo Nivelado de Energía</div>
+                                </div>
+                            </div>
+
+                            <!-- Cash Flow Chart -->
+                            <div class="chart-container">
+                                <h3>Flujo de Caja Proyectado</h3>
+                                <canvas id="cashflow-chart"></canvas>
+                            </div>
+
+                            <!-- Sensitivity Analysis -->
+                            <div class="sensitivity-analysis">
+                                <h3>Análisis de Sensibilidad</h3>
+                                <table class="sensitivity-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Variable</th>
+                                            <th>-20%</th>
+                                            <th>-10%</th>
+                                            <th>Base</th>
+                                            <th>+10%</th>
+                                            <th>+20%</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Tarifa Eléctrica</td>
+                                            <td class="negative">8.2%</td>
+                                            <td class="moderate">10.5%</td>
+                                            <td class="base">12.8%</td>
+                                            <td class="positive">15.1%</td>
+                                            <td class="positive">17.4%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Inversión Inicial</td>
+                                            <td class="positive">18.5%</td>
+                                            <td class="positive">15.4%</td>
+                                            <td class="base">12.8%</td>
+                                            <td class="moderate">10.6%</td>
+                                            <td class="negative">8.8%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Generación</td>
+                                            <td class="negative">8.2%</td>
+                                            <td class="moderate">10.5%</td>
+                                            <td class="base">12.8%</td>
+                                            <td class="positive">15.1%</td>
+                                            <td class="positive">17.4%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Financing Comparison -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Comparador de Opciones de Financiamiento</h2>
+                        </div>
+                        <div class="financing-comparison-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Opción</th>
+                                        <th>Cuota Mensual</th>
+                                        <th>Plazo</th>
+                                        <th>Total Intereses</th>
+                                        <th>Beneficios</th>
+                                        <th>TIR Proyecto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Crédito Verde</strong></td>
+                                        <td>$380,000</td>
+                                        <td>5 años</td>
+                                        <td>$2,800,000</td>
+                                        <td>Tasa preferencial</td>
+                                        <td class="positive">14.2%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Crédito Comercial</strong></td>
+                                        <td>$450,000</td>
+                                        <td>5 años</td>
+                                        <td>$5,000,000</td>
+                                        <td>Estándar</td>
+                                        <td class="moderate">11.8%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Leasing</strong></td>
+                                        <td>$420,000</td>
+                                        <td>7 años</td>
+                                        <td>$3,500,000</td>
+                                        <td>Deducible 100%</td>
+                                        <td class="positive">13.5%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Recursos Propios</strong></td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>$0</td>
+                                        <td>Sin intereses</td>
+                                        <td class="positive">16.8%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Resources -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Recursos Adicionales</h2>
+                    </div>
+                    <div class="financing-resources">
+                        <div class="resource-card">
+                            <h4>📋 Documentos Requeridos</h4>
+                            <ul>
+                                <li>Cédula de ciudadanía</li>
+                                <li>Últimos 3 recibos de energía</li>
+                                <li>Certificado de ingresos</li>
+                                <li>Cotización del sistema solar</li>
+                                <li>Certificado de tradición (si aplica)</li>
+                            </ul>
+                        </div>
+                        <div class="resource-card">
+                            <h4>🏦 Líneas de Crédito Verde</h4>
+                            <ul>
+                                <li><strong>Findeter:</strong> Tasa compensada para municipios</li>
+                                <li><strong>Bancóldex:</strong> Línea verde para empresas</li>
+                                <li><strong>FNG:</strong> Garantías para PYMES</li>
+                                <li><strong>Fenalco:</strong> Programa comercios verdes</li>
+                            </ul>
+                        </div>
+                        <div class="resource-card">
+                            <h4>💡 Tips de Financiamiento</h4>
+                            <ul>
+                                <li>Compare mínimo 3 opciones</li>
+                                <li>Negocie la tasa de interés</li>
+                                <li>Revise costos ocultos</li>
+                                <li>Considere seguros incluidos</li>
+                                <li>Evalúe prepagos sin penalización</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Report Section -->
+            <section id="report" class="section">
+                <div class="section-header">
+                    <h1>Generador de Informes</h1>
+                    <p>Crea propuestas profesionales para tus clientes</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Información del Proyecto</h2>
+                    </div>
+                    
+                    <div class="grid grid-2">
+                        <div>
+                            <h3>Datos del Cliente</h3>
+                            <div class="form-group">
+                                <label for="client-name">Nombre del Cliente</label>
+                                <input type="text" id="client-name" placeholder="Nombre completo o empresa">
+                            </div>
+                            <div class="form-group">
+                                <label for="client-email">Email</label>
+                                <input type="email" id="client-email" placeholder="cliente@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="client-phone">Teléfono</label>
+                                <input type="tel" id="client-phone" placeholder="+57 300 123 4567">
+                            </div>
+                            <div class="form-group">
+                                <label for="client-address">Dirección del Proyecto</label>
+                                <input type="text" id="client-address" placeholder="Dirección completa">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3>Detalles del Sistema</h3>
+                            <div class="form-group">
+                                <label for="system-type">Tipo de Sistema</label>
+                                <select id="system-type">
+                                    <option value="ongrid">On-Grid (Conectado a Red)</option>
+                                    <option value="offgrid">Off-Grid (Aislado)</option>
+                                    <option value="hybrid">Híbrido</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="installation-type">Tipo de Instalación</label>
+                                <select id="installation-type">
+                                    <option value="residential">Residencial</option>
+                                    <option value="commercial">Comercial</option>
+                                    <option value="industrial">Industrial</option>
+                                    <option value="rural">Rural</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="roof-type">Tipo de Techo</label>
+                                <select id="roof-type">
+                                    <option value="tile">Teja</option>
+                                    <option value="metal">Metálico</option>
+                                    <option value="concrete">Concreto</option>
+                                    <option value="ground">Suelo</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project-notes">Notas Adicionales del Proyecto</label>
+                        <textarea id="project-notes" rows="4" placeholder="Incluya cualquier detalle relevante sobre el proyecto, requerimientos especiales, o consideraciones técnicas..."></textarea>
+                    </div>
+
+                    <div class="report-options">
+                        <h3>Opciones del Informe</h3>
+                        <div class="options-grid">
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="include-technical" checked>
+                                <span>Incluir especificaciones técnicas detalladas</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="include-financial" checked>
+                                <span>Incluir análisis financiero completo</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="include-diagram" checked>
+                                <span>Incluir diagrama de conexión</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="include-timeline" checked>
+                                <span>Incluir cronograma de instalación</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="include-warranty" checked>
+                                <span>Incluir información de garantías</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="include-maintenance" checked>
+                                <span>Incluir plan de mantenimiento</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="report-actions">
+                        <button class="btn btn-secondary" onclick="previewReport()">
+                            <span class="btn-icon">👁️</span>
+                            Vista Previa
+                        </button>
+                        <button class="btn btn-primary" onclick="generatePDF()">
+                            <span class="btn-icon">📄</span>
+                            Generar PDF
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Report Preview -->
+                <div id="report-preview" class="card" style="display: none;">
+                    <div class="card-header">
+                        <h2>Vista Previa del Informe</h2>
+                    </div>
+                    <div class="report-preview-content">
+                        <div class="preview-header">
+                            <div class="preview-logo">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="60" height="60">
+                                    <path d="M12 2L3 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z"/>
+                                </svg>
+                                <h1>Synergyatech</h1>
+                                <p>Soluciones Fotovoltaicas Integrales</p>
+                            </div>
+                        </div>
+
+                        <div class="preview-section">
+                            <h3>Resumen Ejecutivo</h3>
+                            <p>Propuesta de sistema fotovoltaico diseñado específicamente para las necesidades energéticas del cliente, 
+                            incorporando la mejor tecnología disponible y cumpliendo con toda la normativa colombiana vigente.</p>
+                        </div>
+
+                        <div class="preview-section">
+                            <h3>Componentes del Sistema</h3>
+                            <div id="preview-components">
+                                <!-- Components will be inserted here -->
+                            </div>
+                        </div>
+
+                        <div class="preview-section">
+                            <h3>Esquema de Conexión</h3>
+                            <div id="preview-diagram">
+                                <!-- Diagram will be inserted here -->
+                            </div>
+                        </div>
+
+                        <div class="preview-section">
+                            <h3>Beneficios del Sistema</h3>
+                            <ul class="benefits-list">
+                                <li>✅ Reducción significativa en costos de energía</li>
+                                <li>✅ Independencia energética</li>
+                                <li>✅ Contribución al medio ambiente</li>
+                                <li>✅ Valorización del inmueble</li>
+                                <li>✅ Retorno de inversión garantizado</li>
+                            </ul>
+                        </div>
+
+                        <div class="preview-footer">
+                            <div class="synergyatech-message">
+                                <h4>¿Por qué elegir Synergyatech?</h4>
+                                <p>En Synergyatech contamos con más de 10 años de experiencia en el diseño e instalación de sistemas fotovoltaicos en Colombia. 
+                                Nuestro equipo de ingenieros certificados garantiza la máxima calidad y eficiencia en cada proyecto.</p>
+                                <p><strong>¡Contáctanos para recibir asesoría personalizada!</strong></p>
+                                <div class="contact-info">
+                                    <p>📧 info@synergyatech.com</p>
+                                    <p>📱 +57 300 123 4567</p>
+                                    <p>🌐 www.synergyatech.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Synergyatech</h3>
+                    <p>Líderes en soluciones fotovoltaicas para Colombia</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="LinkedIn">💼</a>
+                        <a href="#" aria-label="YouTube">📺</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="#calculator">Calculadora Solar</a></li>
+                        <li><a href="#regulations">Regulaciones</a></li>
+                        <li><a href="#learning">Curso Solar</a></li>
+                        <li><a href="#financing">Financiamiento</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>📍 Cúcuta, Norte de Santander</p>
+                    <p>📞 +57 300 123 4567</p>
+                    <p>✉️ info@synergyatech.com</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Certificaciones</h4>
+                    <p>✅ Instalador certificado RETIE</p>
+                    <p>✅ Miembro SER Colombia</p>
+                    <p>✅ ISO 9001:2015</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Synergyatech. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Device Configuration Modal -->
+    <div id="device-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Configurar Dispositivo</h3>
+                <span class="modal-close" onclick="closeDeviceModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="modal-device-name">Nombre del dispositivo</label>
+                    <input type="text" id="modal-device-name" placeholder="Ej: Nevera principal">
+                </div>
+                <div class="form-group">
+                    <label for="modal-device-power">Potencia (W)</label>
+                    <input type="number" id="modal-device-power" placeholder="Ej: 400">
+                </div>
+                <div class="form-group">
+                    <label for="modal-device-quantity">Cantidad</label>
+                    <input type="number" id="modal-device-quantity" value="1" min="1">
+                </div>
+                <div class="form-group">
+                    <label for="modal-device-hours">Horas de uso diario</label>
+                    <input type="number" id="modal-device-hours" value="24" min="1" max="24">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeDeviceModal()">Cancelar</button>
+                <button class="btn btn-primary" onclick="saveDeviceConfig()">Agregar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Device Modal -->
+    <div id="custom-device-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Agregar Dispositivo Personalizado</h3>
+                <span class="modal-close" onclick="closeCustomModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="custom-device-name">Nombre del dispositivo</label>
+                    <input type="text" id="custom-device-name" placeholder="Ej: Bomba de agua">
+                </div>
+                <div class="form-group">
+                    <label for="custom-device-power">Potencia (W)</label>
+                    <input type="number" id="custom-device-power" placeholder="Ej: 750">
+                </div>
+                <div class="form-group">
+                    <label for="custom-device-quantity">Cantidad</label>
+                    <input type="number" id="custom-device-quantity" value="1" min="1">
+                </div>
+                <div class="form-group">
+                    <label for="custom-device-hours">Horas de uso diario</label>
+                    <input type="number" id="custom-device-hours" placeholder="Ej: 4" min="1" max="24">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeCustomModal()">Cancelar</button>
+                <button class="btn btn-primary" onclick="addCustomDevice()">Agregar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loading-spinner" class="loading-overlay" style="display: none;">
+        <div class="spinner"></div>
+        <p>Generando informe...</p>
+    </div>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
